@@ -29,9 +29,22 @@ public class BatchDemoApplication {
 				.build();
 	}
 	@Bean
-	public Job firstJob(JobRepository jobRepository, Step step1) {
+	public Step step2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+		return new StepBuilder("Step2", jobRepository)
+				.tasklet(new Tasklet() {
+					@Override
+					public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+						System.out.println("Hi First Step2");
+						return RepeatStatus.FINISHED;
+					}
+				}, transactionManager)
+				.build();
+	}
+	@Bean
+	public Job firstJob(JobRepository jobRepository, Step step1,Step step2) {
 		return new JobBuilder("job1", jobRepository)
 				.start(step1)
+				.next(step2)
 				.build();
 	}
 
