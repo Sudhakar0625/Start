@@ -1,10 +1,40 @@
 package com.sudhakar.batchDemo;
 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @SpringBootApplication
 public class BatchDemoApplication {
+	@Bean
+	public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+		return new StepBuilder("Step1", jobRepository)
+				.tasklet(new Tasklet() {
+					@Override
+					public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+						System.out.println("Hi First Step1");
+						return RepeatStatus.FINISHED;
+					}
+				}, transactionManager)
+				.build();
+	}
+	@Bean
+	public Job firstJob(JobRepository jobRepository, Step step1) {
+		return new JobBuilder("job1", jobRepository)
+				.start(step1)
+				.build();
+	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(BatchDemoApplication.class, args);
