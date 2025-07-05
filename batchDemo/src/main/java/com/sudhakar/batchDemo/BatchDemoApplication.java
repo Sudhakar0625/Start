@@ -16,39 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @SpringBootApplication
 public class BatchDemoApplication {
-	@Bean
-	public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-		return new StepBuilder("Step1", jobRepository)
-				.tasklet(new Tasklet() {
-					@Override
-					public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-						System.out.println("Hi First Step1");
-						return RepeatStatus.FINISHED;
-					}
-				}, transactionManager)
-				.build();
-	}
-	@Bean
-	public Step step2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-		return new StepBuilder("Step2", jobRepository)
-				.tasklet(new Tasklet() {
-					@Override
-					public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-						System.out.println("Hi First Step2");
-						return RepeatStatus.FINISHED;
-					}
-				}, transactionManager)
-				.build();
-	}
-	@Bean
-	public Job firstJob(JobRepository jobRepository, Step step1,Step step2) {
-		return new JobBuilder("job1", jobRepository)
-				.start(step1)
-				.next(step2)
-				.build();
-	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(BatchDemoApplication.class, args);
 		System.out.println("Hi sudhakar Welcome.OK");
