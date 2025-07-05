@@ -1,0 +1,19 @@
+Index: batchDemo/src/main/java/com/sudhakar/batchDemo/BatchDemoApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.sudhakar.batchDemo;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\n@SpringBootApplication\r\npublic class BatchDemoApplication {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tSpringApplication.run(BatchDemoApplication.class, args);\r\n\t\tSystem.out.println(\"Hi sudhakar Welcome.\");\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/batchDemo/src/main/java/com/sudhakar/batchDemo/BatchDemoApplication.java b/batchDemo/src/main/java/com/sudhakar/batchDemo/BatchDemoApplication.java
+--- a/batchDemo/src/main/java/com/sudhakar/batchDemo/BatchDemoApplication.java	(revision 5b94fcb4273bbf7399835ea4bfdc7a9472aab5d1)
++++ b/batchDemo/src/main/java/com/sudhakar/batchDemo/BatchDemoApplication.java	(date 1751712073600)
+@@ -8,7 +8,7 @@
+ 
+ 	public static void main(String[] args) {
+ 		SpringApplication.run(BatchDemoApplication.class, args);
+-		System.out.println("Hi sudhakar Welcome.");
++		System.out.println("Hi sudhakar Welcome.OK");
+ 	}
+ 
+ }
